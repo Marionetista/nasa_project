@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../models/astro_picture.dart';
-import '../services/nasa_api_service.dart';
+import '../../models/astro_picture.dart';
+import '../../services/nasa_api_service.dart';
 import 'home_page_state.dart';
 
 class HomePageCubit extends Cubit<HomePageState> {

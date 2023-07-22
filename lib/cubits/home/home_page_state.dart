@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import '../models/astro_picture.dart';
+import '../../models/astro_picture.dart';
 
 class HomePageState extends Equatable {
   factory HomePageState.initial() => const HomePageState(
