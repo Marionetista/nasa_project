@@ -24,7 +24,10 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
+        backgroundColor: Colors.black,
         appBar: AppBar(
+          backgroundColor: Colors.black,
+          centerTitle: false,
           title: const Text('Astronomy Picture of the Day'),
         ),
         body: SafeArea(

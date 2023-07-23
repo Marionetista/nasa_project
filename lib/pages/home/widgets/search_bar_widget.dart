@@ -19,8 +19,10 @@ class SearchBarWidget extends StatelessWidget {
               child: TextField(
                 controller: controller,
                 keyboardType: TextInputType.datetime,
+                style: const TextStyle(color: Colors.white),
                 decoration: const InputDecoration(
                   hintText: 'Search date (yyyy-mm-dd)',
+                  hintStyle: TextStyle(color: Colors.grey),
                 ),
               ),
             ),

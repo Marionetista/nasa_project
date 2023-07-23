@@ -15,7 +15,7 @@ class HomePageCubit extends Cubit<HomePageState> {
     emit(state.copyWith(isLoading: true, errorMessage: ''));
 
     try {
-      final pictures = await apiService.fetchAstronomyPicturesOfLastFiveDays();
+      final pictures = await apiService.fetchAstronomyPicturesOfLastDays();
 
       if (pictures.isNotEmpty) {
         final astronomyPictures =

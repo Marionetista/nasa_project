@@ -26,11 +26,10 @@ class NasaApiService {
     return _fetchData(apiUrl);
   }
 
-  Future<List<Map<String, dynamic>>>
-      fetchAstronomyPicturesOfLastFiveDays() async {
+  Future<List<Map<String, dynamic>>> fetchAstronomyPicturesOfLastDays() async {
     final List<Map<String, dynamic>> pictures = [];
 
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 10; i++) {
       final date = DateTime.now().subtract(Duration(days: i));
       final data = await fetchPicture(date);
       pictures.add(data);
