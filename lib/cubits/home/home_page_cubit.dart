@@ -34,7 +34,44 @@ class HomePageCubit extends Cubit<HomePageState> {
       emit(
         state.copyWith(
           isLoading: false,
-          errorMessage: 'An unexpected error occurred, try again later.',
+          errorMessage: 'An unexpected error occurred, tap to try again.',
+        ),
+      );
+    }
+  }
+
+  Future<void> searchAstronomyPicture({String? date}) async {
+    emit(state.copyWith(isLoading: true, errorMessage: ''));
+
+    try {
+      List<Map<String, dynamic>> picturesData;
+
+      if (date != null) {
+        picturesData = [
+          await apiService.searchAstronomyPictureByDate(date: date)
+        ];
+      } else {
+        throw Exception('Invalid search parameters');
+      }
+
+      if (picturesData.isNotEmpty) {
+        final astronomyPictures =
+            picturesData.map((data) => AstroPicture.fromJson(data)).toList();
+
+        emit(state.copyWith(isLoading: false, data: astronomyPictures));
+      } else {
+        emit(
+          state.copyWith(
+            isLoading: false,
+            errorMessage: 'No matching data found',
+          ),
+        );
+      }
+    } catch (e) {
+      emit(
+        state.copyWith(
+          isLoading: false,
+          errorMessage: 'An unexpected error occurred, tap to try again.',
         ),
       );
     }
