@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../cubits/home/home_page_cubit.dart';
 import '../../cubits/home/home_page_state.dart';
+import 'widgets/images_list_widget.dart';
+import 'widgets/search_bar_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -46,77 +48,25 @@ class _HomePageState extends State<HomePage> {
                 } else {
                   return Column(
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: TextField(
-                                controller: _searchController,
-                                keyboardType: TextInputType.datetime,
-                                decoration: const InputDecoration(
-                                  hintText: 'Search date (yyy-mm-dd)',
-                                ),
-                              ),
-                            ),
-                            ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(30),
-                                ),
-                              ),
-                              onPressed: () {
-                                final searchTerm =
-                                    _searchController.text.trim();
+                      SearchBarWidget(
+                        controller: _searchController,
+                        onPressed: () {
+                          final searchTerm = _searchController.text.trim();
 
-                                if (searchTerm.isNotEmpty) {
-                                  const datePattern = r'^\d{4}-\d{2}-\d{2}$';
+                          if (searchTerm.isNotEmpty) {
+                            const datePattern = r'^\d{4}-\d{2}-\d{2}$';
 
-                                  if (RegExp(datePattern)
-                                      .hasMatch(searchTerm)) {
-                                    context
-                                        .read<HomePageCubit>()
-                                        .searchAstronomyPicture(
-                                          date: searchTerm,
-                                        );
-                                  }
-                                }
-                              },
-                              child: const Icon(Icons.search),
-                            ),
-                          ],
-                        ),
+                            if (RegExp(datePattern).hasMatch(searchTerm)) {
+                              context
+                                  .read<HomePageCubit>()
+                                  .searchAstronomyPicture(
+                                    date: searchTerm,
+                                  );
+                            }
+                          }
+                        },
                       ),
-                      Expanded(
-                        child: ListView.builder(
-                          itemCount: state.data.length,
-                          itemBuilder: (context, index) {
-                            final astroPicture = state.data[index];
-
-                            return Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Image.network(astroPicture.url),
-                                Padding(
-                                  padding: const EdgeInsets.all(16.0),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text('Date: ${astroPicture.date}'),
-                                      Text('Title: ${astroPicture.title}'),
-                                      Text(
-                                        'Explanation: ${astroPicture.explanation}',
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                const Divider(),
-                              ],
-                            );
-                          },
-                        ),
-                      ),
+                      ImagesListWidget(imagesList: state.data)
                     ],
                   );
                 }
