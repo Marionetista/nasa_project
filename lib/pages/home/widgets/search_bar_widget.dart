@@ -21,7 +21,7 @@ class SearchBarWidget extends StatelessWidget {
                 keyboardType: TextInputType.datetime,
                 style: const TextStyle(color: Colors.white),
                 decoration: const InputDecoration(
-                  hintText: 'Search date (yyyy-mm-dd)',
+                  hintText: 'Search by date (yyyy-mm-dd)',
                   hintStyle: TextStyle(color: Colors.grey),
                   focusedBorder: UnderlineInputBorder(
                     borderSide: BorderSide(color: Colors.white),

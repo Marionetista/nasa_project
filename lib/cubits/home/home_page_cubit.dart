@@ -1,11 +1,14 @@
+import 'dart:io';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../models/astro_picture.dart';
 import '../../services/nasa_api_service.dart';
 import 'home_page_state.dart';
 
 class HomePageCubit extends Cubit<HomePageState> {
-  HomePageCubit({required this.apiKey})
-      : apiService = NasaApiService(apiKey),
+  HomePageCubit({
+    required this.apiKey,
+  })  : apiService = NasaApiService(apiKey),
         super(HomePageState.initial());
 
   final String apiKey;
@@ -30,6 +33,22 @@ class HomePageCubit extends Cubit<HomePageState> {
           ),
         );
       }
+    } on SocketException {
+      emit(
+        state.copyWith(
+          isLoading: false,
+          errorMessage:
+              'No internet connection. Please check your network settings and tap to try again.',
+        ),
+      );
+    } on HttpException {
+      emit(
+        state.copyWith(
+          isLoading: false,
+          errorMessage:
+              'Failed to connect to the server. Please try again later.',
+        ),
+      );
     } catch (e) {
       emit(
         state.copyWith(
@@ -67,6 +86,22 @@ class HomePageCubit extends Cubit<HomePageState> {
           ),
         );
       }
+    } on SocketException {
+      emit(
+        state.copyWith(
+          isLoading: false,
+          errorMessage:
+              'No internet connection. Please check your network settings and tap to try again.',
+        ),
+      );
+    } on HttpException {
+      emit(
+        state.copyWith(
+          isLoading: false,
+          errorMessage:
+              'Failed to connect to the server. Please try again later.',
+        ),
+      );
     } catch (e) {
       emit(
         state.copyWith(
