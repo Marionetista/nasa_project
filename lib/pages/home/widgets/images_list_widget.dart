@@ -30,8 +30,48 @@ class ImagesListWidget extends StatelessWidget {
                       ),
                     );
                   },
-                  child: Image.network(
-                    astroPicture.url,
+                  child: Stack(
+                    children: [
+                      Image.network(astroPicture.url),
+                      Positioned(
+                        top: 10,
+                        left: 10,
+                        child: Container(
+                          padding: const EdgeInsets.all(5.0),
+                          decoration: const BoxDecoration(
+                            color: Colors.black,
+                            borderRadius: BorderRadius.all(Radius.circular(15)),
+                          ),
+                          child: Text(
+                            astroPicture.title,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        bottom: 10,
+                        right: 10,
+                        child: Container(
+                          padding: const EdgeInsets.all(5.0),
+                          decoration: const BoxDecoration(
+                            color: Colors.black,
+                            borderRadius: BorderRadius.all(Radius.circular(15)),
+                          ),
+                          child: Text(
+                            astroPicture.date,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 const Divider(),

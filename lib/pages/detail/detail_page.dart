@@ -51,6 +51,11 @@ class BookDetailPage extends StatelessWidget {
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                             ),
+                            subtitle: Text(
+                              picture.date,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            ),
                           ),
                           const SizedBox(height: 20.0),
                           Text(picture.explanation),
