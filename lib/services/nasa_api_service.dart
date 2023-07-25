@@ -6,7 +6,7 @@ class NasaApiService {
 
   final String apiKey;
 
-  Future<Map<String, dynamic>> _fetchData(String apiUrl) async {
+  Future<Map<String, dynamic>> fetchData(String apiUrl) async {
     final response = await http.get(Uri.parse(apiUrl));
 
     if (response.statusCode == 200) {
@@ -23,7 +23,7 @@ class NasaApiService {
     final apiUrl =
         'https://api.nasa.gov/planetary/apod?api_key=$apiKey&date=$formattedDate';
 
-    return _fetchData(apiUrl);
+    return fetchData(apiUrl);
   }
 
   Future<List<Map<String, dynamic>>> fetchAstronomyPicturesOfLastDays() async {
@@ -44,6 +44,6 @@ class NasaApiService {
     final apiUrl =
         'https://api.nasa.gov/planetary/apod?api_key=$apiKey&date=$date';
 
-    return _fetchData(apiUrl);
+    return fetchData(apiUrl);
   }
 }
